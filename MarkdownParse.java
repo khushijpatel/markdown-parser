@@ -1,4 +1,5 @@
 //https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
+//Taken from CSE15L lab partner (Jeff)
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,23 +17,39 @@ public class MarkdownParse {
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
-            //toReturn.add(markdown.substring(openParen + 1, closeParen));
-            try {
-                if(!(markdown.substring(openBracket - 1, openBracket).equals("!"))) {      
-                    toReturn.add(markdown.substring(openParen + 1, closeParen));
+
+            String returnedStr;
+            int start;
+            int end;
+
+            // Determine the checked indices
+            if (currentIndex == 0) {
+                start = currentIndex;
+                end = currentIndex + 1;
+                
+            } else {
+                start = openBracket - 1;
+                end = openBracket;
+            }
+
+            // Check if there is a ! before []
+            if (markdown.substring(start, end).equals("!") == false) {
+                returnedStr = markdown.substring(openParen + 1, closeParen);
+
+                // Remove extra spaces if present
+                returnedStr = returnedStr.replaceAll(" ", "");
+
+                // Check if the string is empty
+                if (returnedStr.equals("") == false) {
+                    toReturn.add(returnedStr);
                 }
-            } catch(Exception e) {     
-                //toReturn.add(markdown.substring(openParen + 1, closeParen));
             }
-            if(!(markdown.substring(openParen - 1, openParen).equals(" "))) {      
-                toReturn.add(markdown.substring(openParen + 1, closeParen));
-            }
+
             currentIndex = closeParen + 1;
-            
         }
-        System.out.println("currentIndex is: " + currentIndex);
 
         return toReturn;
+        
     }
 
 
