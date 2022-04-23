@@ -11,7 +11,7 @@ public class MarkdownParseTest{
     public void addition() {
         assertEquals(2, 1 + 1);
     }
-    /*
+
     @Test
     public void testLinks() throws IOException{
         Path fileName = Path.of("test-file.md");
@@ -22,8 +22,8 @@ public class MarkdownParseTest{
         result.add(1, "some-thing.html");
         assertEquals(links, result);
     }
-    */
 
+    
     public void testLinks1() throws IOException{
         Path fileName = Path.of("tester.md");
         String content = Files.readString(fileName);
