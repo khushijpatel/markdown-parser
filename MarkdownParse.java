@@ -18,6 +18,7 @@ public class MarkdownParse {
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
 
+            /*
             String returnedStr;
             int start;
             int end;
@@ -44,8 +45,31 @@ public class MarkdownParse {
                     toReturn.add(returnedStr);
                 }
             }
+            */
 
-            currentIndex = closeParen + 1;
+            if (openBracket == -1 || closeBracket == -1 || openParen == -1 || closeParen == -1){
+                return toReturn;
+            }
+            //check to make sure that "]" and "(" are side by side
+            if (closeBracket != openParen -1){
+                return toReturn;
+            }
+            //to distinguish between image and link syntax
+            if (openBracket == 0){
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                currentIndex = closeParen + 1;
+            }
+            else if (markdown.substring(openBracket-1, openBracket).equals("!")){
+                currentIndex = closeParen + 1;
+                continue;
+            }
+            //if it is 100% a link, add it to the list
+            else{
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+                currentIndex = closeParen + 1;
+            }
+
+            //currentIndex = closeParen + 1;
         }
 
         return toReturn;

@@ -14,7 +14,7 @@ public class MarkdownParseTest{
 
     @Test
     public void testLinks() throws IOException{
-        Path fileName = Path.of("test-file.md");
+        Path fileName = Path.of("C:\\Users\\K Patel\\Documents\\GitHub\\markdown-parser\\test-file.md");
         String content = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(content);
         ArrayList<String> result = new ArrayList<String>();
@@ -23,31 +23,31 @@ public class MarkdownParseTest{
         assertEquals(links, result);
     }
 
-    
+    @Test
     public void testLinks1() throws IOException{
-        Path fileName = Path.of("tester.md");
+        Path fileName = Path.of("C:\\Users\\K Patel\\Documents\\GitHub\\markdown-parser\\tester.md");
         String content = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(content);
         ArrayList<String> result = new ArrayList<String>();
         result.add(0, "www.google.com");
-        result.add(1, "https://cse.ucsd.edu/");
-        result.add(2, "http://www.sysnet.ucsd.edu/~voelker/pubcom/logo/CSELogo_4Cv.jpg");
+        result.add(1, "  https://cse.ucsd.edu/");
         assertEquals(links, result);
     }
 
+    @Test
     public void testLinks2() throws IOException{
-        Path fileName = Path.of("tester2.md");
+        Path fileName = Path.of("C:\\Users\\K Patel\\Documents\\GitHub\\markdown-parser\\tester2.md");
         String content = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(content);
         ArrayList<String> result = new ArrayList<String>();
         result.add(0, "www.google.com");
-        result.add(1, "https://cse.ucsd.edu/");
+        result.add(1, "  https://cse.ucsd.edu/");
         assertEquals(links, result);
     }
 
-
+    @Test
     public void testLinks3() throws IOException{
-        Path fileName = Path.of("tester3.md");
+        Path fileName = Path.of("C:\\Users\\K Patel\\Documents\\GitHub\\markdown-parser\\tester3.md");
         String content = Files.readString(fileName);
         ArrayList<String> links = MarkdownParse.getLinks(content);
         ArrayList<String> result = new ArrayList<String>();
@@ -55,7 +55,45 @@ public class MarkdownParseTest{
         result.add(1, "https://google.com");
         result.add(2, "some-thing.html");
         result.add(3, "https://google.com");
-        result.add(4, "some-thing.html");
+        result.add(4, " some-thing.html ");
+        assertEquals(links, result);
+    }
+
+    @Test
+    public void testLinks4() throws IOException{
+        Path fileName = Path.of("C:\\Users\\K Patel\\Documents\\GitHub\\markdown-parser\\snippet1.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(0, "url.com");
+        result.add(1, "`google.com");
+        result.add(2, "google.com");
+        result.add(4, "ucsd.edu");
+        assertEquals(links, result);
+    }
+
+    @Test
+    public void testLinks5() throws IOException{
+        Path fileName = Path.of("C:\\Users\\K Patel\\Documents\\GitHub\\markdown-parser\\snippet2.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(0, "b.com");
+        result.add(1, "a.com(())");
+        result.add(2, "example.com");
+        assertEquals(links, result);
+    }
+
+    @Test
+    public void testLinks6() throws IOException{
+        Path fileName = Path.of("C:\\Users\\K Patel\\Documents\\GitHub\\markdown-parser\\snippet3.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+        ArrayList<String> result = new ArrayList<String>();
+        result.add(0, "https://www.twitter.com");
+        result.add(1, "https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule");
+        result.add(2, "github.com");
+        result.add(4, "https://cse.ucsd.edu/");
         assertEquals(links, result);
     }
 }
