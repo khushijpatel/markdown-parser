@@ -68,7 +68,6 @@ public class MarkdownParseTest{
         result.add(0, "url.com");
         result.add(1, "`google.com");
         result.add(2, "google.com");
-        result.add(4, "ucsd.edu");
         assertEquals(links, result);
     }
 
@@ -92,8 +91,7 @@ public class MarkdownParseTest{
         ArrayList<String> result = new ArrayList<String>();
         result.add(0, "https://www.twitter.com");
         result.add(1, "https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule");
-        result.add(2, "github.com");
-        result.add(4, "https://cse.ucsd.edu/");
+        result.add(2, "https://cse.ucsd.edu/");
         assertEquals(links, result);
     }
 }
